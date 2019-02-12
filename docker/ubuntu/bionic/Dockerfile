@@ -25,6 +25,12 @@ RUN apt-get --yes install \
         g++-7 \
         git \
         autoconf \
+        python3.6 \
+        libglew-dev \
+        freeglut3-dev \
+        yasm \
+        libtool \
+        gettext \
         sudo \
         bison \
         wget \
@@ -38,6 +44,8 @@ RUN apt-get --yes install \
         expect \
         htop \
         valgrind \
+        libfreetype6-dev \
+        linux-tools-common \
         libxtst6 \
         vim && \
 # ensure we have options configured for gcc
@@ -52,5 +60,7 @@ RUN apt-get --yes install \
     useradd -m -u ${uid} -U -s /bin/bash -p ${passwd} ${username} && \
     usermod -aG sudo ${username} && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+#switch over to run as the create user
+USER ${username}
 WORKDIR /opt/clion/bin
 CMD ./clion.sh
